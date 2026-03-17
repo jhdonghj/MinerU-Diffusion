@@ -90,7 +90,7 @@ The same framework supports both personalized OpenClaw optimization and scalable
 
 Our long-term goal is to **build efficient and reliable diffusion-based decoding for document OCR**. 
 
-✅ **Release MinerU-Diffusion-V1:** A diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding.
-✅ Support SGLang to accommodate diffusion computation.
-⬜ Release MinerU-Diffusion-V2: More Small, More Faster, More Elegant, More Powerful!
-⬜ Release Training Code
+- ✅ **Release MinerU-Diffusion-V1:** A diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding.
+- ✅ Support SGLang to accommodate diffusion computation.
+- ⬜ Release MinerU-Diffusion-V2: More Small, More Faster, More Elegant, More Powerful!
+- ⬜ Release Training Code
