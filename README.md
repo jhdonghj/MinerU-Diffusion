@@ -59,12 +59,21 @@ By introducing block-wise diffusion, uncertainty-driven curriculum learning, it 
 
 > **Highlights:** MinerU-Diffusion maintains a strong accuracy–efficiency trade-off, achieving 2.12× speedup with 99.9% and 3.01× speedup with 98.8% relative accuracy.
 > 
+## 📈 Performance
+
+<p align="center">
+  <img src="assets/performance_tradeoff.jpeg" alt="Performance Trade-off" width="775">
+</p>
+
+MinerU-Diffusion provides a flexible accuracy-throughput trade-off through threshold control. Compared with MinerU2.5, it achieves up to **3.26x** TPS, while also offering practical operating points such as **2.12x speedup with 99.9% relative accuracy** and **3.01x speedup with 98.8% relative accuracy**.
+
 ## 🗂️ Repository Layout
 
 ```text
 MinerU-Diffusion/
 ├── assets/
 │   ├── banner.png
+│   ├── performance_tradeoff.jpeg
 │   └── train.png
 ├── docs/
 │   └── MinerU-Diffusion-V1.pdf
@@ -115,6 +124,31 @@ The same framework supports both personalized OpenClaw optimization and scalable
 
 </details>
 
+## 🤝 Acknowledgement
+
+This work is heavily built on the following open-source models:
+
+[MinerU](https://github.com/opendatalab/mineru), [Qwen2-VL](https://github.com/QwenLM/Qwen3-VL), [SDAR](https://github.com/JetAstra/SDAR), and [LLaDA](https://github.com/ML-GSAI/LLaDA).
+
+These acceleration methods (engines):
+
+[SGLang](https://github.com/sgl-project/sglang), [Nano-vLLM](https://github.com/GeeeekExplorer/nano-vllm), and [jetengine](https://github.com/Labman42/JetEngine/tree/0ddc55ad3fb712b6374515b78d656f420e1a7243),
+
+and theoretical foundations:
+
+[MDLM](https://arxiv.org/pdf/2406.07524), [DiffuLLaMA](https://arxiv.org/abs/2410.17891), [Block Diffusion](https://arxiv.org/abs/2503.09573).
+
+## 📚 Citation
+
+If you find our paper and code useful in your research, please consider giving a star and citation.
+
+```bibtex
+@article{mineru_diffusion,
+  title={MinerU-Diffusion Technical Report},
+  author={MinerU-Team},
+  journal={arXiv preprint arXiv:XXXX.XXXXX},
+  year={2026}
+}
+```
+
 ---
-
-
