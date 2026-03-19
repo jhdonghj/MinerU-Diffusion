@@ -138,7 +138,7 @@ SGLANG_SERVER_URL=http://127.0.0.1:31002/v1/chat/completions \
 bash scripts/run_inference.sh
 ```
 
-For a more detailed SGLang guide, including environment setup, tokenizer requirements, server launch options, and request examples, see [sglang_notes/README.md](./sglang_notes/README.md).
+For a more detailed SGLang guide, including environment setup, tokenizer requirements, server launch options, and request examples, see [docs/sglang/README.md](./docs/sglang/README.md).
 
 ## 🤝 Acknowledgement
 
