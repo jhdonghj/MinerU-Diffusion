@@ -72,7 +72,6 @@ def run(args: argparse.Namespace) -> None:
     device = args.device
     dtype = getattr(torch, args.dtype)
 
-    start_time = time.time()
     _print_summary(args, model_path, device, dtype)
 
     tokenizer = AutoTokenizer.from_pretrained(model_path, trust_remote_code=True)
@@ -91,15 +90,13 @@ def run(args: argparse.Namespace) -> None:
         {"role": "user", "content": [{"type": "image", "image": args.image_path}, {"type": "text", "text": prompt}]},
     ]
 
-    prompt_texts, generation_indices = processor.apply_chat_template(
+    prompt_text = processor.apply_chat_template(
         messages,
-        return_assistant_tokens_mask=True,
         add_generation_prompt=True,
     )
     inputs = processor(
         images=[args.image_path],
-        text=prompt_texts,
-        generation_indices=generation_indices,
+        text=prompt_text,
         truncation=True,
         max_length=args.max_length,
         return_tensors="pt",
@@ -112,6 +109,7 @@ def run(args: argparse.Namespace) -> None:
     pixel_values = inputs["pixel_values"].to(dtype).to(device)
 
     with torch.no_grad():
+        start_time = time.time()
         response_ids, _ = model.generate(
             pixel_values=pixel_values,
             image_grid_thw=image_grid_thw,
@@ -126,8 +124,9 @@ def run(args: argparse.Namespace) -> None:
             tokenizer=tokenizer,
             stopping_criteria=list(STOP_STRINGS),
         )
+        elapsed = time.time() - start_time
 
     response = tokenizer.decode(response_ids[0], skip_special_tokens=False)
     for stop in STOP_STRINGS:
         response = response.split(stop, 1)[0]
-    _print_response(response.strip(), time.time() - start_time)
+    _print_response(response.strip(), elapsed)

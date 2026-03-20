@@ -107,7 +107,6 @@ def run(args: argparse.Namespace) -> None:
     prompt = args.prompt or TASK_PROMPTS[args.prompt_type]
     model_path = Path(args.model_path).resolve()
     mask_token_id = _load_mask_token_id(model_path)
-    start_time = time.time()
 
     _print_summary(args, model_path, mask_token_id)
 
@@ -128,15 +127,17 @@ def run(args: argparse.Namespace) -> None:
         stop_tokens=list(STOP_STRINGS),
     )
 
+    start_time = time.time()
     results = llm.generate_messages(
         [_build_message(args.image_path, prompt)],
         sampling_params=sampling_params,
         use_tqdm=False,
     )
+    elapsed = time.time() - start_time
     response = results[0]["text"]
     for stop in STOP_STRINGS:
         response = response.split(stop, 1)[0]
-    _print_response(response.strip(), time.time() - start_time)
+    _print_response(response.strip(), elapsed)
 
 
 __all__ = ["add_arguments", "run"]
