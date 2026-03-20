@@ -110,7 +110,7 @@ def run(args: argparse.Namespace) -> None:
 
     with torch.no_grad():
         start_time = time.time()
-        response_ids, _ = model.generate(
+        response_ids, _, _ = model.generate(
             pixel_values=pixel_values,
             image_grid_thw=image_grid_thw,
             input_ids=input_ids,
