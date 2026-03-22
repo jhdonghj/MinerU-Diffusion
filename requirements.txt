@@ -1,0 +1,22 @@
+# Recommended for a first-time setup with a Conda environment such as `dmineru` (Python 3.12).
+# SGLang server installation is intentionally excluded here and documented in docs/sglang/README.md.
+
+--extra-index-url https://download.pytorch.org/whl/cu128
+
+accelerate==1.11.0
+einops==0.8.1
+flash-attn==2.8.3
+liger-kernel==0.6.4
+numpy==2.2.6
+pillow==12.0.0
+qwen-vl-utils==0.0.14
+safetensors==0.6.2
+sentencepiece==0.2.1
+termcolor==3.2.0
+torch==2.8.0+cu128
+torchaudio==2.8.0+cu128
+torchvision==0.23.0+cu128
+tqdm==4.67.1
+transformers==4.52.1
+triton==3.4.0
+xxhash==3.6.0
