@@ -154,6 +154,19 @@ Notes:
 - `flash-attn==2.8.3` must match your local CUDA, compiler, and PyTorch stack. If a prebuilt wheel is not available for your machine, install a compatible wheel manually or build it from source before retrying `pip install -r requirements.txt`.
 - The `sglang` server binary itself is not installed by the root `requirements.txt`. If you want to run [`scripts/run_sglang_server.sh`](./scripts/run_sglang_server.sh), install `sglang` in a dedicated environment or SGLang checkout first, then follow [docs/sglang/README.md](./docs/sglang/README.md).
 
+## 📦 Model Weights
+
+Download the model weights before running inference, then point `MODEL_PATH` to the local checkpoint directory.
+
+- Hugging Face: [`opendatalab/MinerU-Diffusion-0315-2.5B`](https://huggingface.co/opendatalab/MinerU-Diffusion-0315-2.5B)
+- ModelScope: download the corresponding MinerU-Diffusion model weights from the ModelScope model hub and set `MODEL_PATH` to that local directory as well
+
+Example:
+
+```bash
+MODEL_PATH=/path/to/MinerU-Diffusion-0315-2.5B
+```
+
 ## 🧩 Prompt Types
 
 MinerU-Diffusion supports multiple prompt types for different document parsing targets. Each prompt is designed for a specific output structure rather than a single generic free-form response.
