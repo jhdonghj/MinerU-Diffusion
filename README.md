@@ -74,21 +74,24 @@ MinerU-Diffusion provides a flexible accuracy-throughput trade-off through thres
 MinerU-Diffusion/
 ├── assets/
 │   ├── banner.png
+│   ├── homepage-demo.mp4
 │   ├── image.png
 │   ├── performance_tradeoff.jpeg
 │   └── train.png
 ├── docs/
 │   ├── MinerU-Diffusion-V1.pdf
-│   ├── language_diffusion_demo.html
 │   └── sglang/
 ├── engines/
+│   ├── __init__.py
 │   ├── hf/
 │   ├── nano_dvlm/
 │   └── sglang/
 ├── mineru_diffusion/
+│   ├── __init__.py
 │   ├── configuration_mineru_diffusion.py
 │   ├── modeling_mineru_diffusion.py
 │   └── processing_mineru_diffusion.py
+├── requirements.txt
 ├── scripts/
 │   ├── run_inference.py
 │   ├── run_inference.sh
@@ -145,6 +148,17 @@ Notes:
 - The requirements file uses the CUDA 12.8 PyTorch wheel index and pins a tested set of core package versions for first-time setup.
 - `flash-attn==2.8.3` must match your local CUDA, compiler, and PyTorch stack. If a prebuilt wheel is not available for your machine, install a compatible wheel manually or build it from source before retrying `pip install -r requirements.txt`.
 - The `sglang` server binary itself is not installed by the root `requirements.txt`. If you want to run [`scripts/run_sglang_server.sh`](./scripts/run_sglang_server.sh), install `sglang` in a dedicated environment or SGLang checkout first, then follow [docs/sglang/README.md](./docs/sglang/README.md).
+
+## 🧩 Prompt Types
+
+MinerU-Diffusion supports multiple prompt types for different document parsing targets. Each prompt is designed for a specific output structure rather than a single generic free-form response.
+
+| Prompt Type | Function | Input Setting | Output Format | Example Output |
+| --- | --- | --- | --- | --- |
+| `Layout Detection` | Page-level layout parsing with region coordinates, category tags, and rotation direction. | Resized to `1036 x 1036`. | Bounding boxes plus element labels and rotation tags. | `<\| box_start \|>100 200 300 400<\| box_end \|> <\| ref_start \|>title<\| ref_end \|> <\| rotate_up \|>` |
+| `Text Recognition` | Plain OCR text extraction. | Native resolution, `4` to `2048` image tokens. | Raw OCR text. | `The results of the analyses of the uncertainty of the field data and related assumptions are shown in Figs 13 and 14.` |
+| `Formula Recognition` | Formula extraction and conversion into LaTeX. | Native resolution, `4` to `2048` image tokens. | LaTeX formula content. | `\hat{F} = \operatorname{Concat}([F_1, F_2, \dots, F_n])` |
+| `Table Recognition` | Structured table extraction for downstream processing. | Native resolution, `4` to `2048` image tokens. | OTSL (Open Table Structure Language). | `<fcel> Site <fcel> Cl <fcel> NO3 <fcel> SO4 <fcel> Na ... <nl>` |
 
 ## 🚀 Inference
 
