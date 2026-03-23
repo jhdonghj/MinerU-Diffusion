@@ -62,12 +62,10 @@ By introducing block-wise diffusion, uncertainty-driven curriculum learning, it 
   <img src="assets/train.png"  alt="Overview"  width="600">
 </p>
 
+<p align="center">
+  <em>Training of MinerU-Diffusion. Left: the target token sequence is randomly masked to form a partially observed input, and the model predicts only the masked positions under visual and prompt conditioning. Right: the structured block-attention mask used during training, where tokens attend bidirectionally within each block and causally to all preceding blocks, enabling parallel diffusion refinement within blocks while preserving coarse autoregressive structure across blocks.</em>
+</p>
 
-
-
-
-> **Highlights:** MinerU-Diffusion maintains a strong accuracy–efficiency trade-off, achieving 2.12× speedup with 99.9% and 3.01× speedup with 98.8% relative accuracy.
-> 
 ## 📈 Performance
 
 <p align="center">
