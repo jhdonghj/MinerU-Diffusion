@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/dc79ef18-4c93-4265-9e71-945856216ea2" controls width="200" align="center"></video>
+  <video src="https://drive.google.com/file/d/1_Gl47wM_RH3YINvZIOop7YOlsxwvMOYj/view?usp=sharing" controls width="200" align="center"></video>
 </p>
 
 
