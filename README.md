@@ -51,6 +51,14 @@ Our long-term goal is to **build efficient and reliable diffusion-based decoding
 By introducing block-wise diffusion, uncertainty-driven curriculum learning, it achieves up to 3.2× faster decoding while improving robustness and reducing reliance on language priors.
 
 <p align="center">
+  <img src="assets/decode.png" alt="Diffusion Decoding" width="700">
+</p>
+
+<p align="center">
+  <em>Diffusion decoding progressively reconstructs structured text from masked tokens under visual conditioning: black tokens are confirmed, red tokens are being updated, and yellow tokens remain masked, enabling parallel generation with global consistency, in contrast to autoregressive left-to-right decoding.</em>
+</p>
+
+<p align="center">
   <img src="assets/train.png"  alt="Overview"  width="600">
 </p>
 
@@ -75,6 +83,7 @@ MinerU-Diffusion/
 ├── .gitignore
 ├── assets/
 │   ├── banner.png
+│   ├── decode.png
 │   ├── homepage-demo.mp4
 │   ├── image.png
 │   ├── performance_tradeoff.jpeg
