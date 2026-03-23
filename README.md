@@ -2,7 +2,7 @@
   <img src="assets/banner.png" alt="MinerU-Diffusion" width="100%">
 </p>
 
-# MinerU-Diffusion
+# MinerU-Diffusion: Rethinking Document OCR as Inverse Rendering via Diffusion Decoding
 
 <p align="center">
   <img src="https://img.shields.io/badge/✨_Diffusion_Decoding-darkgreen?style=for-the-badge" alt="Diffusion Decoding" />
@@ -21,7 +21,7 @@
 </p>
 
 <p align="center">
-  <video src="https://github.com/user-attachments/assets/0d203a40-4503-436d-876f-f70354bd1e63" controls width="200" align="center"></video>
+  <video src="https://github.com/user-attachments/assets/dc79ef18-4c93-4265-9e71-945856216ea2" controls width="200" align="center"></video>
 </p>
 
 
@@ -33,9 +33,9 @@ replaces autoregressive decoding with block-level parallel diffusion decoding.
 
 ## 🎯 Roadmap
 
-Our long-term goal is to **build efficient and reliable diffusion-based decoding for document OCR**. 
+Our long-term goal is to **build efficient and reliable 2.5B diffusion-based decoding for document OCR**. 
 
-- ✅ **Release MinerU-Diffusion-V1:** A diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding.
+- ✅ **Release MinerU-Diffusion-V1:** A 2.5B diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding.
 - ✅ Support [SGLang](https://github.com/sgl-project/sglang) to accommodate diffusion computation.
 - ✅ Complete the [Nano-vLLM](https://github.com/GeeeekExplorer/nano-vllm) adaptation used by our `nano_dvlm` engine for single-GPU inference.
 - ✅ Complete the Gradio-based interactive demo implementation.
@@ -79,6 +79,9 @@ MinerU-Diffusion provides a flexible accuracy-throughput trade-off through thres
 ```text
 MinerU-Diffusion/
 ├── .gitignore
+├── LICENSE
+├── README.md
+├── requirements.txt
 ├── assets/
 │   ├── banner.png
 │   ├── decode.png
@@ -89,9 +92,11 @@ MinerU-Diffusion/
 ├── docs/
 │   ├── MinerU-Diffusion-V1.pdf
 │   ├── gradio/
+│   │   ├── .gitignore
 │   │   ├── app.py
 │   │   ├── diffusion_hf.py
 │   │   ├── mineru_hf.py
+│   │   ├── runtime_paths.example.json
 │   │   └── speed_compare/
 │   └── sglang/
 │       ├── README.md
@@ -104,10 +109,13 @@ MinerU-Diffusion/
 │   │   ├── __init__.py
 │   │   └── runner.py
 │   ├── nano_dvlm/
-│   │   ├── nanovllm/
+│   │   ├── .gitignore
+│   │   ├── LICENSE
 │   │   ├── __init__.py
+│   │   ├── nanovllm/
 │   │   ├── bench.py
 │   │   ├── example.py
+│   │   ├── llm_outputs/
 │   │   └── pyproject.toml
 │   └── sglang/
 │       └── __init__.py
@@ -121,11 +129,11 @@ MinerU-Diffusion/
 │       └── bbox.py
 ├── requirements.txt
 ├── scripts/
+│   ├── run_end2end.py
+│   ├── run_end2end.sh
 │   ├── run_inference.py
 │   ├── run_inference.sh
 │   └── run_sglang_server.sh
-├── LICENSE
-└── README.md
 ```
 
 ## 🌐 Online Experience
@@ -208,6 +216,11 @@ MinerU-Diffusion supports multiple prompt types for different document parsing t
 ## 🚀 Inference
 
 Replace `MODEL_PATH` and `IMAGE_PATH` with your own paths before running.
+
+There are two local entry scripts:
+
+- [`scripts/run_inference.sh`](./scripts/run_inference.sh): single prompt inference for one engine (`hf`, `nano_dvlm`, or `sglang`)
+- [`scripts/run_end2end.sh`](./scripts/run_end2end.sh): two-stage page parsing with layout detection plus per-block content extraction, producing merged markdown and optional structured artifacts
 
 ### Transformers Example
 
@@ -325,6 +338,40 @@ bash scripts/run_inference.sh
 ```
 
 For a more detailed SGLang guide, including environment setup, tokenizer requirements, server launch options, and request examples, see [docs/sglang/README.md](./docs/sglang/README.md).
+
+## 📄 End-to-End Parsing
+
+[`scripts/run_end2end.py`](./scripts/run_end2end.py) runs the full two-step document parsing pipeline on a single page image:
+
+1. Detect page layout regions.
+2. Crop each detected block and run the matching prompt for text, table, or formula extraction.
+3. Merge retained blocks into a markdown result.
+
+Use the wrapper script below for local execution:
+
+```bash
+cd /path/to/MinerU-Diffusion
+MODEL_PATH=/path/to/MinerU-Diffusion-model \
+IMAGE_PATH=/path/to/input-page.png \
+OUTPUT_PATH=/path/to/output.md \
+BLOCKS_JSON_PATH=/path/to/output-blocks.json \
+SAVE_LAYOUT_IMAGE=1 \
+LAYOUT_IMAGE_PATH=/path/to/output-layout.png \
+bash scripts/run_end2end.sh
+```
+
+Common environment variables:
+
+- `MODEL_PATH`: local MinerU-Diffusion model directory
+- `IMAGE_PATH`: input page image
+- `OUTPUT_PATH`: optional markdown output file; if empty, markdown is printed to stdout
+- `BLOCKS_JSON_PATH`: optional JSON file with metrics and parsed blocks
+- `SAVE_LAYOUT_IMAGE=1`: save a layout visualization with bounding boxes
+- `LAYOUT_IMAGE_PATH`: optional explicit path for the layout visualization
+- `KEEP_PARATEXT=1`: keep header, footer, page number, and other paratext blocks
+- `VERBOSE=1`: print per-block progress to stderr
+
+Advanced generation controls are also exposed as environment variables in [`scripts/run_end2end.sh`](./scripts/run_end2end.sh), including `DTYPE`, `MAX_LENGTH`, `LAYOUT_GEN_LENGTH`, `CONTENT_GEN_LENGTH`, `TABLE_GEN_LENGTH`, `FORMULA_GEN_LENGTH`, `BLOCK_SIZE`, `TEMPERATURE`, `REMASK_STRATEGY`, and `DYNAMIC_THRESHOLD`.
 
 ## 🤝 Acknowledgement
 
