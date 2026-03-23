@@ -2,7 +2,7 @@
   <img src="assets/banner.png" alt="MinerU-Diffusion" width="100%">
 </p>
 
-# MinerU-Diffusion
+# MinerU-Diffusion: Rethinking Document OCR as Inverse Rendering via Diffusion Decoding
 
 <p align="center">
   <img src="https://img.shields.io/badge/✨_Diffusion_Decoding-darkgreen?style=for-the-badge" alt="Diffusion Decoding" />
@@ -33,9 +33,9 @@ replaces autoregressive decoding with block-level parallel diffusion decoding.
 
 ## 🎯 Roadmap
 
-Our long-term goal is to **build efficient and reliable diffusion-based decoding for document OCR**. 
+Our long-term goal is to **build efficient and reliable 2.5B diffusion-based decoding for document OCR**. 
 
-- ✅ **Release MinerU-Diffusion-V1:** A diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding.
+- ✅ **Release MinerU-Diffusion-V1:** A 2.5B diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding.
 - ✅ Support [SGLang](https://github.com/sgl-project/sglang) to accommodate diffusion computation.
 - ✅ Complete the [Nano-vLLM](https://github.com/GeeeekExplorer/nano-vllm) adaptation used by our `nano_dvlm` engine for single-GPU inference.
 - ✅ Complete the Gradio-based interactive demo implementation.
@@ -79,6 +79,9 @@ MinerU-Diffusion provides a flexible accuracy-throughput trade-off through thres
 ```text
 MinerU-Diffusion/
 ├── .gitignore
+├── LICENSE
+├── README.md
+├── requirements.txt
 ├── assets/
 │   ├── banner.png
 │   ├── decode.png
@@ -89,9 +92,11 @@ MinerU-Diffusion/
 ├── docs/
 │   ├── MinerU-Diffusion-V1.pdf
 │   ├── gradio/
+│   │   ├── .gitignore
 │   │   ├── app.py
 │   │   ├── diffusion_hf.py
 │   │   ├── mineru_hf.py
+│   │   ├── runtime_paths.example.json
 │   │   └── speed_compare/
 │   └── sglang/
 │       ├── README.md
@@ -104,10 +109,13 @@ MinerU-Diffusion/
 │   │   ├── __init__.py
 │   │   └── runner.py
 │   ├── nano_dvlm/
-│   │   ├── nanovllm/
+│   │   ├── .gitignore
+│   │   ├── LICENSE
 │   │   ├── __init__.py
+│   │   ├── nanovllm/
 │   │   ├── bench.py
 │   │   ├── example.py
+│   │   ├── llm_outputs/
 │   │   └── pyproject.toml
 │   └── sglang/
 │       └── __init__.py
@@ -126,8 +134,6 @@ MinerU-Diffusion/
 │   ├── run_inference.py
 │   ├── run_inference.sh
 │   └── run_sglang_server.sh
-├── LICENSE
-└── README.md
 ```
 
 ## 🌐 Online Experience
