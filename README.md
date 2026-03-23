@@ -72,6 +72,7 @@ MinerU-Diffusion provides a flexible accuracy-throughput trade-off through thres
 
 ```text
 MinerU-Diffusion/
+├── .gitignore
 ├── assets/
 │   ├── banner.png
 │   ├── homepage-demo.mp4
@@ -80,12 +81,29 @@ MinerU-Diffusion/
 │   └── train.png
 ├── docs/
 │   ├── MinerU-Diffusion-V1.pdf
+│   ├── gradio/
+│   │   ├── app.py
+│   │   ├── diffusion_hf.py
+│   │   ├── mineru_hf.py
+│   │   └── speed_compare/
 │   └── sglang/
+│       ├── README.md
+│       ├── mineru_request.py
+│       ├── run_infer.sh
+│       └── run_server.sh
 ├── engines/
 │   ├── __init__.py
 │   ├── hf/
+│   │   ├── __init__.py
+│   │   └── runner.py
 │   ├── nano_dvlm/
+│   │   ├── nanovllm/
+│   │   ├── __init__.py
+│   │   ├── bench.py
+│   │   ├── example.py
+│   │   └── pyproject.toml
 │   └── sglang/
+│       └── __init__.py
 ├── mineru_diffusion/
 │   ├── __init__.py
 │   ├── configuration_mineru_diffusion.py
