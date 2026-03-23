@@ -29,7 +29,7 @@
 
 ## 📰 News
 
-- **[2026/3/20]** 🔥 We release **MinerU-Diffusion-V1** — a diffusion-based framework for document OCR that
+- **[2026/3/24]** 🔥 We release **MinerU-Diffusion-V1** — a 2.5B diffusion-based framework for document OCR that
 replaces autoregressive decoding with block-level parallel diffusion decoding.
 
 ## 🎯 Roadmap
@@ -39,6 +39,7 @@ Our long-term goal is to **build efficient and reliable diffusion-based decoding
 - ✅ **Release MinerU-Diffusion-V1:** A diffusion-based framework for document OCR that replaces autoregressive decoding with block-level parallel diffusion decoding.
 - ✅ Support [SGLang](https://github.com/sgl-project/sglang) to accommodate diffusion computation.
 - ✅ Complete the [Nano-vLLM](https://github.com/GeeeekExplorer/nano-vllm) adaptation used by our `nano_dvlm` engine for single-GPU inference.
+- ✅ Complete the Gradio-based interactive demo implementation.
 - ⬜ Release MinerU-Diffusion-V2: More Small, More Faster, More Elegant, More Powerful!
 - ⬜ Release Training Code
 
@@ -51,15 +52,21 @@ Our long-term goal is to **build efficient and reliable diffusion-based decoding
 By introducing block-wise diffusion, uncertainty-driven curriculum learning, it achieves up to 3.2× faster decoding while improving robustness and reducing reliance on language priors.
 
 <p align="center">
+  <img src="assets/decode.png" alt="Diffusion Decoding" width="700">
+</p>
+
+<p align="center">
+  <em>Diffusion decoding progressively reconstructs structured text from masked tokens under visual conditioning: black tokens are confirmed, red tokens are being updated, and yellow tokens remain masked, enabling parallel generation with global consistency, in contrast to autoregressive left-to-right decoding.</em>
+</p>
+
+<p align="center">
   <img src="assets/train.png"  alt="Overview"  width="600">
 </p>
 
+<p align="center">
+  <em>Training of MinerU-Diffusion. Left: the target token sequence is randomly masked to form a partially observed input, and the model predicts only the masked positions under visual and prompt conditioning. Right: the structured block-attention mask used during training, where tokens attend bidirectionally within each block and causally to all preceding blocks, enabling parallel diffusion refinement within blocks while preserving coarse autoregressive structure across blocks.</em>
+</p>
 
-
-
-
-> **Highlights:** MinerU-Diffusion maintains a strong accuracy–efficiency trade-off, achieving 2.12× speedup with 99.9% and 3.01× speedup with 98.8% relative accuracy.
-> 
 ## 📈 Performance
 
 <p align="center">
@@ -75,6 +82,7 @@ MinerU-Diffusion/
 ├── .gitignore
 ├── assets/
 │   ├── banner.png
+│   ├── decode.png
 │   ├── homepage-demo.mp4
 │   ├── image.png
 │   ├── performance_tradeoff.jpeg
