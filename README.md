@@ -160,13 +160,13 @@ Notes:
 
 Download the model weights before running inference, then point `MODEL_PATH` to the local checkpoint directory.
 
-- Hugging Face: [`opendatalab/MinerU-Diffusion-0315-2.5B`](https://huggingface.co/opendatalab/MinerU-Diffusion-0315-2.5B)
+- Hugging Face: [`opendatalab/MinerU-Diffusion-V1-0320-2.5B`](https://huggingface.co/opendatalab/MinerU-Diffusion-V1-0320-2.5B)
 - ModelScope: download the corresponding MinerU-Diffusion model weights from the ModelScope model hub and set `MODEL_PATH` to that local directory as well
 
 Example:
 
 ```bash
-MODEL_PATH=/path/to/MinerU-Diffusion-0315-2.5B
+MODEL_PATH=/path/to/MinerU-Diffusion-V1-0320-2.5B
 ```
 
 ## 🧩 Prompt Types
